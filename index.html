@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Madara Kalpina — Product Manager</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;800&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+
+    /* ── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --bordeaux: #601D2D;
+      --oat:      #EDD5AB;
+      --denim:    #97B2D1;
+      --citrus:   #99992C;
+      --ink:      #12080A;
+      --paper:    #FAF8F3;
+      --nav-h:    52px;
+      --pad-v:    clamp(3.5rem, 8vw, 6rem);
+      --pad-h:    clamp(1.5rem, 8vw, 7rem);
+    }
+
+    /* ── BASE ───────────────────────────────────────────────── */
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--paper);
+      padding-bottom: 44px; /* ribbon height */
+    }
+
+    a { color: inherit; text-decoration: none; }
+    address { font-style: normal; }
+    ul { list-style: none; padding: 0; }
+
+    /* ── NAV ────────────────────────────────────────────────── */
+    nav[aria-label="Page sections"] {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--ink);
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0 var(--pad-h);
+    }
+
+    nav ul {
+      display: flex;
+      align-items: center;
+      overflow-x: auto;
+      scrollbar-width: none;
+      gap: 0;
+    }
+    nav ul::-webkit-scrollbar { display: none; }
+
+    nav a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--oat);
+      padding: 0.4rem 0.85rem;
+      white-space: nowrap;
+      display: block;
+      opacity: 0.65;
+    }
+    nav a:hover { opacity: 1; }
+
+    .nav-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    #theme-toggle,
+    #print-btn {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      background: transparent;
+      border: 1px solid rgba(237,213,171,.3);
+      color: var(--oat);
+      padding: 0.28rem 0.8rem;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+    #theme-toggle:hover,
+    #print-btn:hover {
+      opacity: 1;
+      background: var(--bordeaux);
+      border-color: var(--bordeaux);
+    }
+
+    /* ── HERO ───────────────────────────────────────────────── */
+    #hero {
+      background: var(--bordeaux);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 4rem var(--pad-h) clamp(3rem, 6vw, 4.5rem);
+    }
+
+    #hero h1 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(4.5rem, 16vw, 13rem);
+      text-transform: uppercase;
+      letter-spacing: -0.025em;
+      line-height: 0.87;
+      color: var(--oat);
+    }
+
+    #hero .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 400;
+      font-size: clamp(1rem, 2.5vw, 1.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.4em;
+      color: var(--denim);
+      margin-top: 1.25rem;
+    }
+
+    #hero address {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 2rem;
+      font-size: 0.85rem;
+      color: rgba(237,213,171,.55);
+      margin-top: 2rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid rgba(237,213,171,.14);
+    }
+    #hero address a:hover { color: var(--oat); }
+
+    /* ── ABOUT ──────────────────────────────────────────────── */
+    #about {
+      background: var(--citrus);
+      padding: var(--pad-v) var(--pad-h);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem 5rem;
+      align-items: start;
+    }
+
+    #about h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      color: var(--paper);
+    }
+
+    .about-body {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      padding-top: 0.35rem;
+    }
+    .about-body p {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: rgba(18,8,10,.85);
+    }
+
+    /* ── EXPERIENCE ─────────────────────────────────────────── */
+    #experience {
+      background: var(--paper);
+      padding: var(--pad-v) 0 0;
+    }
+
+    #experience > h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--bordeaux);
+      margin-bottom: 3rem;
+      padding: 0 var(--pad-h);
+    }
+
+    /* Both columns pin together as one unit */
+    .exp-sticky-display {
+      position: sticky;
+      top: var(--nav-h);
+      height: calc(100vh - var(--nav-h));
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 0 4rem;
+      align-items: center;
+      padding: 0 var(--pad-h);
+    }
+
+    /* ── Left: always-visible role list ── */
+    .exp-sidebar {
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
+
+    .exp-role-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.05rem;
+      width: 100%;
+    }
+
+    .exp-role-item {
+      padding: 0.45rem 0 0.45rem 1.5rem;
+      border-left: 4px solid transparent;
+      cursor: pointer;
+      transition: border-color 0.35s ease;
+    }
+    .exp-role-item.active {
+      border-left-color: var(--bordeaux);
+    }
+
+    .role-company {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(0.85rem, 1.45vw, 1.1rem);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      line-height: 1;
+      color: rgba(18,8,10,.22);
+      display: block;
+      transition: font-size 0.38s ease, color 0.35s ease, letter-spacing 0.35s ease;
+    }
+    .exp-role-item.active .role-company {
+      font-size: clamp(2rem, 3.5vw, 3.5rem);
+      letter-spacing: -0.01em;
+      color: var(--bordeaux);
+    }
+
+    .role-meta {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.7rem, 1vw, 0.82rem);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: rgba(18,8,10,.4);
+      display: block;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.38s ease, opacity 0.35s ease;
+    }
+    .exp-role-item.active .role-meta {
+      max-height: 2em;
+      opacity: 1;
+    }
+
+    /* ── Right: content panels (stacked, one visible at a time) ── */
+    .exp-content-panels {
+      display: grid;
+      grid-template-areas: "panel";
+      height: 100%;
+      align-content: center;
+      overflow: clip; /* clip avoids creating a scroll context — wheel events reach the page */
+    }
+
+    .exp-content-panel {
+      grid-area: panel;
+      opacity: 0;
+      transform: translateY(36px);
+      transition: opacity 0.42s ease, transform 0.42s ease;
+      pointer-events: none;
+      padding: 2rem 0;
+    }
+    .exp-content-panel.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .exp-content-panel.leaving {
+      opacity: 0;
+      transform: translateY(-36px);
+      pointer-events: none;
+    }
+
+    .exp-content-panel h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      color: var(--bordeaux);
+      margin-bottom: 0.35rem;
+    }
+    .exp-context {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(18,8,10,.4);
+      margin-bottom: 1.1rem;
+    }
+    .exp-content-panel ul {
+      list-style: disc;
+      padding-left: 1.05rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+    .exp-content-panel li {
+      font-size: 0.925rem;
+      line-height: 1.72;
+      color: var(--ink);
+    }
+
+    /* ── Scroll sentinels: invisible, drive IntersectionObserver ── */
+    .exp-sentinel {
+      height: 40vh;
+      pointer-events: none;
+    }
+
+    /* ── SKILLS ─────────────────────────────────────────────── */
+    #skills {
+      background: var(--ink);
+      padding: var(--pad-v) 0;
+    }
+
+    #skills > h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--oat);
+      margin-bottom: 3rem;
+      padding: 0 var(--pad-h);
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .skill-group {
+      padding: 2rem 2.25rem;
+      border-right: 1px solid rgba(237,213,171,.1);
+      border-bottom: 1px solid rgba(237,213,171,.1);
+    }
+    .skill-group:nth-child(3n+1) { padding-left: var(--pad-h); }
+    .skill-group:nth-child(3n)   { padding-right: var(--pad-h); border-right: none; }
+    .skill-group:nth-child(4),
+    .skill-group:nth-child(5),
+    .skill-group:nth-child(6)    { border-bottom: none; }
+
+    .skill-group h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid currentColor;
+    }
+    .skill-group:nth-child(odd)  h3 { color: var(--denim); }
+    .skill-group:nth-child(even) h3 { color: var(--citrus); }
+
+    .skill-group ul {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.45rem;
+    }
+    .skill-group li {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      text-transform: lowercase;
+      letter-spacing: 0.03em;
+      color: var(--oat);
+      background: rgba(237,213,171,.07);
+      border: 1px solid rgba(237,213,171,.18);
+      padding: 0.35rem 0.85rem;
+      border-radius: 2px;
+    }
+
+    /* ── LANGUAGES ──────────────────────────────────────────── */
+    #languages {
+      background: var(--oat);
+      padding: var(--pad-v) var(--pad-h);
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 2rem 5rem;
+      align-items: start;
+    }
+
+    #languages h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      color: var(--bordeaux);
+    }
+
+    #languages ul {
+      display: flex;
+      flex-direction: column;
+      padding-top: 0.35rem;
+    }
+    #languages li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(96,29,45,.15);
+      cursor: default;
+    }
+    .lang-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+    }
+    .lang-level {
+      display: grid;
+      grid-template-areas: "slot";
+    }
+    .lang-dots,
+    .lang-label {
+      grid-area: slot;
+      text-align: right;
+      transition: opacity 0.2s ease;
+    }
+    .lang-dots {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      color: var(--bordeaux);
+      opacity: 1;
+    }
+    .lang-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(18,8,10,.5);
+      opacity: 0;
+      white-space: nowrap;
+    }
+    #languages li:hover .lang-dots  { opacity: 0; }
+    #languages li:hover .lang-label { opacity: 1; }
+
+    /* ── EDUCATION ──────────────────────────────────────────── */
+    #education {
+      background: var(--paper);
+      padding: var(--pad-v) var(--pad-h);
+    }
+
+    #education > h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--bordeaux);
+      margin-bottom: 3rem;
+    }
+
+    .edu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+    }
+
+    .edu-card {
+      padding-top: 1.25rem;
+      border-top: 3px solid var(--bordeaux);
+    }
+
+    .edu-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      line-height: 1.2;
+      color: var(--ink);
+      margin-bottom: 0.4rem;
+    }
+
+    .edu-card .school {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--bordeaux);
+    }
+
+    .edu-card .edu-loc {
+      font-size: 0.77rem;
+      color: rgba(18,8,10,.42);
+      margin-top: 0.15rem;
+    }
+
+    .edu-card time {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--citrus);
+      margin-top: 0.9rem;
+    }
+
+    /* ── FOOTER / CONTACT ───────────────────────────────────── */
+    footer#contact {
+      background: var(--bordeaux);
+      padding: var(--pad-v) var(--pad-h);
+      text-align: center;
+    }
+
+    footer#contact h2 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(3.5rem, 14vw, 10rem);
+      text-transform: uppercase;
+      letter-spacing: -0.01em;
+      line-height: 0.88;
+      color: var(--oat);
+      margin-bottom: 2.5rem;
+    }
+
+    footer#contact address {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.75rem 2.5rem;
+      font-size: 0.95rem;
+      color: rgba(237,213,171,.6);
+    }
+
+    footer#contact address a {
+      color: var(--oat);
+      border-bottom: 1px solid rgba(237,213,171,.35);
+      padding-bottom: 2px;
+    }
+    footer#contact address a:hover { border-color: var(--oat); }
+
+    /* ── RIBBON ─────────────────────────────────────────────── */
+    #ribbon {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      z-index: 90;
+      background: var(--bordeaux);
+      overflow: hidden;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+    #ribbon.ribbon-visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .ribbon-track {
+      display: flex;
+      align-items: center;
+      width: max-content;
+      animation: ribbon-scroll 70s linear infinite;
+    }
+    .ribbon-track span {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--oat);
+      white-space: nowrap;
+      padding: 0 0.5rem;
+    }
+    .ribbon-sep {
+      color: var(--citrus) !important;
+      font-size: 0.6rem !important;
+      padding: 0 1.5rem !important;
+      letter-spacing: 0 !important;
+      flex-shrink: 0;
+    }
+    @keyframes ribbon-scroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      #about {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      /* Experience: hide left list, show stacked content panels */
+      .exp-sticky-display {
+        position: static;
+        height: auto;
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .exp-sidebar { display: none; }
+      .exp-content-panels {
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        height: auto;
+        overflow: visible;
+      }
+      .exp-content-panel {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+        padding: 2rem 0;
+        border-top: 1px solid rgba(96,29,45,.12);
+      }
+      .exp-sentinel { height: 0; }
+
+      #languages {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      .nav-actions { display: none; }
+    }
+
+    @media (max-width: 480px) {
+      #hero h1 { font-size: clamp(3.25rem, 22vw, 4.5rem); }
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .skill-group:nth-child(3n+1) { padding-left: var(--pad-h); }
+      .skill-group:nth-child(3n)   { padding-right: 2.25rem; border-right: 1px solid rgba(237,213,171,.1); }
+      .skill-group:nth-child(2n)   { border-right: none; padding-right: var(--pad-h); }
+      .skill-group:nth-child(5),
+      .skill-group:nth-child(6)    { border-bottom: none; }
+      .skill-group:nth-child(4)    { border-bottom: 1px solid rgba(237,213,171,.1); }
+      .edu-grid { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ── HERO ───────────────────────────────────────────── -->
+  <header id="hero">
+    <h1>Madara<br>Kalpina</h1>
+    <p class="hero-title">Product Manager</p>
+    <address>
+      <a href="tel:+37129334535">+371 29334535</a>
+      <a href="mailto:madarakalpina@live.com">madarakalpina@live.com</a>
+      <a href="https://linkedin.com/in/kalpina" target="_blank" rel="noopener">linkedin.com/in/kalpina</a>
+      <span>Prague, Czechia</span>
+    </address>
+  </header>
+
+  <!-- ── NAV ────────────────────────────────────────────── -->
+  <nav aria-label="Page sections">
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#languages">Languages</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button type="button" id="theme-toggle" aria-label="Toggle dark mode">Dark mode</button>
+      <button type="button" id="print-btn" onclick="window.print()">Print / PDF</button>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ── ABOUT ─────────────────────────────────────────── -->
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About</h2>
+      <div class="about-body">
+        <p>I'm a Product Manager who thrives on understanding the user's pain points and creating experiences that resolve them. I've delivered B2B SaaS platforms, consumer apps, and digital products across mobile, web, and even VR. I own full product lifecycles from discovery to launch and love improving UX through data and user feedback.</p>
+        <p>My background in digital marketing shapes how I approach product: I frame problems clearly, keep communication simple, and create feedback loops that matter. I enjoy fast-moving environments, like scale-ups, agencies, and international teams where structure is needed, and decisions have a visible impact.</p>
+      </div>
+    </section>
+
+    <!-- ── EXPERIENCE ─────────────────────────────────────── -->
+    <section id="experience" aria-labelledby="experience-heading">
+      <h2 id="experience-heading">Work Experience</h2>
+      <div class="exp-scroll-stage">
+
+        <!-- sticky display: both columns pin together as one unit -->
+        <div class="exp-sticky-display">
+
+          <!-- left: persistent list of all roles, active one styled prominently -->
+          <div class="exp-sidebar">
+            <div class="exp-role-list">
+
+              <div class="exp-role-item active" data-for="exp-pixelfield">
+                <span class="role-company">Pixelfield</span>
+                <span class="role-meta">2025 – current · Product Manager</span>
+              </div>
+
+              <div class="exp-role-item" data-for="exp-green0meter">
+                <span class="role-company">Green0meter</span>
+                <span class="role-meta">2024 – 2025 · Product Manager</span>
+              </div>
+
+              <div class="exp-role-item" data-for="exp-techchill">
+                <span class="role-company">TechChill</span>
+                <span class="role-meta">2022 – 2023 · Speakers &amp; Agenda Manager</span>
+              </div>
+
+              <div class="exp-role-item" data-for="exp-seb-po">
+                <span class="role-company">SEB Bank</span>
+                <span class="role-meta">2019 – 2022 · Agile Product Owner</span>
+              </div>
+
+              <div class="exp-role-item" data-for="exp-seb-editor">
+                <span class="role-company">SEB Bank</span>
+                <span class="role-meta">Mar 2019 – Jun 2020 · Web Editor</span>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- right: content panels, one visible at a time -->
+          <div class="exp-content-panels">
+
+            <article id="exp-pixelfield" class="exp-content-panel active">
+              <h3>Product Manager</h3>
+              <p class="exp-context">Pixelfield &middot; Prague, Czechia &middot; 2025 – current</p>
+              <ul>
+                <li>Balanced the everyday challenges of agency life while managing the timely delivery of up to 14 short-term projects in parallel.</li>
+                <li>Managed end-to-end project delivery using PRINCE2-Agile framework, balancing client-facing governance, scope control, and stage sign-offs with agile sprint cycles.</li>
+                <li>Worked closely with first-time founders to translate early-stage startup ideas into clearly defined product initiatives, epics, and development-ready user stories.</li>
+                <li>Led the full product lifecycle from discovery and PRD preparation through design, development, and launch across a wide range of digital B2C products including mobile and web apps, VR, games, digital e-stores, and landing pages.</li>
+              </ul>
+            </article>
+
+            <article id="exp-green0meter" class="exp-content-panel">
+              <h3>Product Manager</h3>
+              <p class="exp-context">Green0meter &middot; Prague, Czechia &middot; 2024 – 2025</p>
+              <ul>
+                <li>As the right hand of a product-driven founder, owned the end-to-end product development lifecycle for Green0meter's B2B SaaS platform, driving feature development aligned with both short-term usability and long-term product vision.</li>
+                <li>Collected and analysed user feedback using analytical tools to improve UI and UX, and collaborated with a designer to structure independent features into intuitive, end-to-end user journeys.</li>
+                <li>Led and executed 3rd party integration projects and managed stakeholders on all levels.</li>
+                <li>Helped establish Agile practices within the development team, increasing team velocity through improved planning, prioritisation, and backlog grooming.</li>
+                <li>Conducted hands-on UAT and regression testing, creating a strong feedback loop with developers.</li>
+                <li>Created product documentation and integrated it into Intercom Help Center. This reduced consultant support requests by 50%.</li>
+              </ul>
+            </article>
+
+            <article id="exp-techchill" class="exp-content-panel">
+              <h3>Speakers &amp; Agenda Manager</h3>
+              <p class="exp-context">TechChill &middot; Riga, Latvia &middot; 2022 – 2023</p>
+              <ul>
+                <li>Besides my full time job at the SEB bank, I worked with startup community and curated a program of 130+ speakers for a two day startup conference in 2023 in Riga, Latvia and in Milan, Italy.</li>
+              </ul>
+            </article>
+
+            <article id="exp-seb-po" class="exp-content-panel">
+              <h3>Agile Product Owner</h3>
+              <p class="exp-context">SEB Bank &middot; Riga, Latvia &middot; 2019 – 2022</p>
+              <ul>
+                <li>Managed stakeholders across marketing, sales and other product areas.</li>
+                <li>Held a development backlog for a cross-country team of 7 web editors and frontend developers.</li>
+                <li>Led the development of a Drupal-based CMS for three Baltic countries, collaborating with internal and external designers, UX, developers, and marketing teams.</li>
+                <li>Hired and trained 20+ temporary interns to migrate content from the old CMS to the new platform.</li>
+                <li>Led product strategy and UX-focused roadmap for a cross-country MS SharePoint-based document management system and intranet platform.</li>
+              </ul>
+            </article>
+
+            <article id="exp-seb-editor" class="exp-content-panel">
+              <h3>Web Editor</h3>
+              <p class="exp-context">SEB Bank &middot; Riga, Latvia &middot; Mar 2019 – Jun 2020</p>
+              <ul>
+                <li>Managed SEB bank public website by creating new web content as well as amending the existing one using HTML &amp; CSS.</li>
+                <li>Worked on simple JS applications to improve UX.</li>
+              </ul>
+            </article>
+
+          </div>
+
+        </div>
+
+        <!-- invisible sentinels: one per role, drive the scrollspy observer -->
+        <div class="exp-sentinel" data-role="exp-pixelfield"></div>
+        <div class="exp-sentinel" data-role="exp-green0meter"></div>
+        <div class="exp-sentinel" data-role="exp-techchill"></div>
+        <div class="exp-sentinel" data-role="exp-seb-po"></div>
+        <div class="exp-sentinel" data-role="exp-seb-editor"></div>
+
+      </div>
+    </section>
+
+    <!-- ── SKILLS ─────────────────────────────────────────── -->
+    <section id="skills" aria-labelledby="skills-heading">
+      <h2 id="skills-heading">Technical Skills</h2>
+      <div class="skills-grid">
+
+        <div class="skill-group">
+          <h3>Methodology</h3>
+          <ul>
+            <li>Agile</li>
+            <li>PRINCE2</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3>Product &amp; Project</h3>
+          <ul>
+            <li>Atlassian Jira</li>
+            <li>Figma</li>
+            <li>Lovable</li>
+            <li>Replit</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3>AI Tools</h3>
+          <ul>
+            <li>Gemini</li>
+            <li>Claude</li>
+            <li>Claude Code</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3>Web &amp; Dev</h3>
+          <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JS</li>
+            <li>GitHub</li>
+            <li>Bitbucket</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3>Analytics</h3>
+          <ul>
+            <li>Amplitude</li>
+            <li>MS Clarity</li>
+            <li>GA</li>
+          </ul>
+        </div>
+
+        <div class="skill-group">
+          <h3>Platforms &amp; CMS</h3>
+          <ul>
+            <li>Drupal</li>
+            <li>WordPress</li>
+            <li>Wix</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── LANGUAGES ─────────────────────────────────────────── -->
+    <section id="languages" aria-labelledby="lang-heading">
+      <h2 id="lang-heading">Languages</h2>
+      <ul>
+        <li>
+          <span class="lang-name">English</span>
+          <span class="lang-level">
+            <span class="lang-dots" aria-hidden="true">●●●●</span>
+            <span class="lang-label">Fluent</span>
+          </span>
+        </li>
+        <li>
+          <span class="lang-name">Latvian</span>
+          <span class="lang-level">
+            <span class="lang-dots" aria-hidden="true">●●●●</span>
+            <span class="lang-label">Fluent</span>
+          </span>
+        </li>
+        <li>
+          <span class="lang-name">German</span>
+          <span class="lang-level">
+            <span class="lang-dots" aria-hidden="true">●●●○</span>
+            <span class="lang-label">Conversational</span>
+          </span>
+        </li>
+        <li>
+          <span class="lang-name">Russian</span>
+          <span class="lang-level">
+            <span class="lang-dots" aria-hidden="true">●●●○</span>
+            <span class="lang-label">Conversational</span>
+          </span>
+        </li>
+        <li>
+          <span class="lang-name">Czech</span>
+          <span class="lang-level">
+            <span class="lang-dots" aria-hidden="true">●○○○</span>
+            <span class="lang-label">Beginner</span>
+          </span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ── EDUCATION ──────────────────────────────────────── -->
+    <section id="education" aria-labelledby="education-heading">
+      <h2 id="education-heading">Education</h2>
+      <div class="edu-grid">
+
+        <article class="edu-card">
+          <h3>Front-end Web Development</h3>
+          <p class="school">Riga Coding School</p>
+          <p class="edu-loc">Latvia</p>
+          <time>2019</time>
+        </article>
+
+        <article class="edu-card">
+          <h3>BSc in Computer Sciences</h3>
+          <p class="school">University of Latvia</p>
+          <p class="edu-loc">Latvia</p>
+          <time>2018 (unfinished)</time>
+        </article>
+
+        <article class="edu-card">
+          <h3>BA in Business Administration</h3>
+          <p class="school">University College Birmingham</p>
+          <p class="edu-loc">United Kingdom</p>
+          <time>2015 (Erasmus Exchange)</time>
+        </article>
+
+        <article class="edu-card">
+          <h3>BA in Media &amp; Entertainment Management</h3>
+          <p class="school">NHS Stenden Hogeschool</p>
+          <p class="edu-loc">Netherlands</p>
+          <time>2013 – 2017</time>
+        </article>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER / CONTACT ───────────────────────────────── -->
+  <footer id="contact" aria-labelledby="contact-heading">
+    <h2 id="contact-heading">Get in<br>touch</h2>
+    <address>
+      <a href="mailto:madarakalpina@live.com">madarakalpina@live.com</a>
+      <a href="tel:+37129334535">+371 29334535</a>
+      <a href="https://linkedin.com/in/kalpina" target="_blank" rel="noopener">linkedin.com/in/kalpina</a>
+      <span>Prague, Czechia</span>
+    </address>
+  </footer>
+
+  <!-- ── RIBBON ──────────────────────────────────────────── -->
+  <div id="ribbon" aria-hidden="true">
+    <div class="ribbon-track">
+      <span>Open Communicator</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Leading Cross-Functional Teams</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Data Driven Decision Making</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Highly Organized</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Problem Solver by Choice</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Organization in Chaos</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Focus on User Experience</span>
+      <span class="ribbon-sep">✦</span>
+      <!-- duplicate for seamless loop -->
+      <span>Open Communicator</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Leading Cross-Functional Teams</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Data Driven Decision Making</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Highly Organized</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Problem Solver by Choice</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Organization in Chaos</span>
+      <span class="ribbon-sep">✦</span>
+      <span>Focus on User Experience</span>
+      <span class="ribbon-sep">✦</span>
+    </div>
+  </div>
+
+  <script>
+    // theme toggle
+    const btn  = document.getElementById('theme-toggle');
+    const root = document.documentElement;
+    const stored = localStorage.getItem('theme');
+    if (stored) root.setAttribute('data-theme', stored);
+    btn.addEventListener('click', () => {
+      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+
+    // ribbon: show after hero scrolls out of view
+    const ribbon = document.getElementById('ribbon');
+    const hero   = document.getElementById('hero');
+    new IntersectionObserver(([entry]) => {
+      ribbon.classList.toggle('ribbon-visible', !entry.isIntersecting);
+    }, { threshold: 0 }).observe(hero);
+
+    // scrollspy: sentinel-driven — updates left list + slides right panel in/out
+    function setExpActive(id) {
+      document.querySelectorAll('.exp-role-item').forEach(item =>
+        item.classList.toggle('active', item.dataset.for === id)
+      );
+      document.querySelectorAll('.exp-content-panel').forEach(panel => {
+        if (panel.id === id) {
+          panel.classList.remove('leaving');
+          panel.classList.add('active');
+        } else if (panel.classList.contains('active')) {
+          // slide the outgoing panel upward
+          panel.classList.remove('active');
+          panel.classList.add('leaving');
+          panel.addEventListener('transitionend', () =>
+            panel.classList.remove('leaving'), { once: true }
+          );
+        }
+      });
+    }
+
+    document.querySelectorAll('.exp-sentinel').forEach(s => {
+      new IntersectionObserver(([obs]) => {
+        if (obs.isIntersecting) setExpActive(obs.target.dataset.role);
+      }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 }).observe(s);
+    });
+
+    // clicking a role label smooth-scrolls to that sentinel, landing it in the trigger zone
+    document.querySelectorAll('.exp-role-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const sentinel = document.querySelector(
+          `.exp-sentinel[data-role="${item.dataset.for}"]`
+        );
+        if (!sentinel) return;
+        const targetY = sentinel.getBoundingClientRect().top
+                        + window.scrollY
+                        - window.innerHeight * 0.25;
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+      });
+    });
+  </script>
+
+</body>
+</html>
