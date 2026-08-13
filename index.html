@@ -176,43 +176,48 @@
     .about-body p {
       font-size: 1.05rem;
       line-height: 1.8;
-      color: rgba(18,8,10,.85);
+      color: var(--paper);
     }
 
     /* ── EXPERIENCE ─────────────────────────────────────────── */
     #experience {
       background: var(--paper);
-      padding: var(--pad-v) 0 0;
+      padding: 0;
     }
 
-    #experience > h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      color: var(--bordeaux);
-      margin-bottom: 3rem;
-      padding: 0 var(--pad-h);
-    }
-
-    /* Both columns pin together as one unit */
+    /* Both columns + heading pin together as one unit */
     .exp-sticky-display {
       position: sticky;
       top: var(--nav-h);
       height: calc(100vh - var(--nav-h));
       display: grid;
       grid-template-columns: 1fr 2fr;
-      gap: 0 4rem;
-      align-items: center;
-      padding: 0 var(--pad-h);
+      grid-template-rows: auto 1fr;
+      grid-template-areas:
+        "heading heading"
+        "sidebar content";
+      column-gap: 4rem;
+      row-gap: 1.5rem;
+      padding: 2.5rem var(--pad-h) 2rem;
+    }
+
+    .exp-sticky-display > h2 {
+      grid-area: heading;
+      align-self: end;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      color: var(--bordeaux);
     }
 
     /* ── Left: always-visible role list ── */
     .exp-sidebar {
+      grid-area: sidebar;
       height: 100%;
       display: flex;
-      align-items: center;
+      align-items: flex-start;
     }
 
     .exp-role-list {
@@ -252,27 +257,26 @@
     .role-meta {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 600;
-      font-size: clamp(0.7rem, 1vw, 0.82rem);
+      font-size: clamp(0.72rem, 1.1vw, 0.88rem);
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: rgba(18,8,10,.4);
+      color: rgba(18,8,10,.18);
       display: block;
-      max-height: 0;
-      overflow: hidden;
-      opacity: 0;
-      transition: max-height 0.38s ease, opacity 0.35s ease;
+      margin-top: 0.1rem;
+      transition: font-size 0.38s ease, color 0.35s ease;
     }
     .exp-role-item.active .role-meta {
-      max-height: 2em;
-      opacity: 1;
+      font-size: clamp(0.85rem, 1.3vw, 1rem);
+      color: var(--citrus);
     }
 
     /* ── Right: content panels (stacked, one visible at a time) ── */
     .exp-content-panels {
+      grid-area: content;
       display: grid;
       grid-template-areas: "panel";
       height: 100%;
-      align-content: center;
+      align-content: start;
       overflow: clip; /* clip avoids creating a scroll context — wheel events reach the page */
     }
 
@@ -624,7 +628,11 @@
         position: static;
         height: auto;
         grid-template-columns: 1fr;
-        gap: 0;
+        grid-template-rows: auto auto;
+        grid-template-areas: "heading" "content";
+        column-gap: 0;
+        row-gap: 1.5rem;
+        padding: 1.5rem var(--pad-h);
       }
       .exp-sidebar { display: none; }
       .exp-content-panels {
@@ -708,11 +716,11 @@
 
     <!-- ── EXPERIENCE ─────────────────────────────────────── -->
     <section id="experience" aria-labelledby="experience-heading">
-      <h2 id="experience-heading">Work Experience</h2>
       <div class="exp-scroll-stage">
 
-        <!-- sticky display: both columns pin together as one unit -->
+        <!-- sticky display: heading + both columns pin together as one unit -->
         <div class="exp-sticky-display">
+          <h2 id="experience-heading">Work Experience</h2>
 
           <!-- left: persistent list of all roles, active one styled prominently -->
           <div class="exp-sidebar">
@@ -720,27 +728,27 @@
 
               <div class="exp-role-item active" data-for="exp-pixelfield">
                 <span class="role-company">Pixelfield</span>
-                <span class="role-meta">2025 – current · Product Manager</span>
+                <span class="role-meta">2025 – current</span>
               </div>
 
               <div class="exp-role-item" data-for="exp-green0meter">
                 <span class="role-company">Green0meter</span>
-                <span class="role-meta">2024 – 2025 · Product Manager</span>
+                <span class="role-meta">2024 – 2025</span>
               </div>
 
               <div class="exp-role-item" data-for="exp-techchill">
                 <span class="role-company">TechChill</span>
-                <span class="role-meta">2022 – 2023 · Speakers &amp; Agenda Manager</span>
+                <span class="role-meta">2022 – 2023</span>
               </div>
 
               <div class="exp-role-item" data-for="exp-seb-po">
                 <span class="role-company">SEB Bank</span>
-                <span class="role-meta">2019 – 2022 · Agile Product Owner</span>
+                <span class="role-meta">2019 – 2022</span>
               </div>
 
               <div class="exp-role-item" data-for="exp-seb-editor">
                 <span class="role-company">SEB Bank</span>
-                <span class="role-meta">Mar 2019 – Jun 2020 · Web Editor</span>
+                <span class="role-meta">Mar 2019 – Jun 2020</span>
               </div>
 
             </div>
