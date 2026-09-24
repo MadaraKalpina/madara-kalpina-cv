@@ -47,8 +47,6 @@
       --skills-line:       rgba(18,8,10,.15);
       --skills-chip-fill:  rgba(18,8,10,.06);
       --skills-chip-line:  rgba(18,8,10,.25);
-      --skill-h-1:         #4F1726;           /* bordeaux deepened to pass AA on citrus */
-      --skill-h-2:         var(--ink);
       --lang-bg:     var(--oat);
       --lang-text:   var(--ink);
       --footer-bg:   var(--bordeaux);
@@ -89,8 +87,6 @@
       --skills-line:       rgba(237,213,171,.1);
       --skills-chip-fill:  rgba(237,213,171,.07);
       --skills-chip-line:  rgba(237,213,171,.18);
-      --skill-h-1:         var(--denim);
-      --skill-h-2:         var(--citrus);
       --lang-bg:     #241815;
       --lang-text:   var(--oat);
       --nav-bg:      #0C0708;
@@ -115,8 +111,6 @@
       --skills-line:       rgba(237,213,171,.1);
       --skills-chip-fill:  rgba(237,213,171,.07);
       --skills-chip-line:  rgba(237,213,171,.18);
-      --skill-h-1:         var(--denim);
-      --skill-h-2:         var(--citrus);
       --lang-bg:     #241815;
       --lang-text:   var(--oat);
       --nav-bg:      #0C0708;
@@ -436,6 +430,20 @@
       color: var(--text);
     }
 
+    /* ── SUB-HEADINGS (skill groups, languages, education) ──── */
+    .skill-group h3,
+    .background-grid > div > h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.2rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      line-height: 1.2;
+      margin-bottom: 1.1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid currentColor;
+    }
+
     /* ── SKILLS ─────────────────────────────────────────────── */
     #skills {
       background: var(--skills-bg);
@@ -470,18 +478,8 @@
     .skill-group:nth-child(5),
     .skill-group:nth-child(6)    { border-bottom: none; }
 
-    .skill-group h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 600;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid currentColor;
-    }
-    .skill-group:nth-child(odd)  h3 { color: var(--skill-h-1); }
-    .skill-group:nth-child(even) h3 { color: var(--skill-h-2); }
+    /* sub-headings share one style with .background-grid; colour matches the section heading */
+    .skill-group h3 { color: var(--skills-text); }
 
     .skill-group ul {
       display: flex;
@@ -526,17 +524,7 @@
       align-items: start;
     }
 
-    .background-grid > div > h3 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 600;
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 0.22em;
-      color: var(--accent);
-      margin-bottom: 1.25rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 2px solid currentColor;
-    }
+    .background-grid > div > h3 { color: var(--accent); }
 
     #languages ul {
       display: flex;
