@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <script>
+    try { const t = localStorage.getItem('theme'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Madara Kalpina — Product Manager</title>
   <meta name="description" content="Madara Kalpina — Product Manager in Prague. B2B SaaS, agency and banking experience; end-to-end product ownership, Agile/PRINCE2.">
@@ -24,9 +27,87 @@
       --citrus:   #99992C;
       --ink:      #12080A;
       --paper:    #FAF8F3;
+
+      /* page */
+      --bg:          var(--paper);
+      --text:        var(--ink);
+      --text-muted:  rgba(18,8,10,.68);
+      --text-faint:  rgba(18,8,10,.62);
+      --line:        rgba(96,29,45,.15);
+      --accent:      var(--bordeaux);   /* section headings, company names */
+      --accent-2:    #5C5C17;           /* dates, role meta: citrus darkened to pass AA on paper and oat */
+      --chip-bg:     rgba(96,29,45,.06);
+      --chip-line:   rgba(96,29,45,.2);
+      /* coloured sections */
+      --hero-bg:     var(--bordeaux);
+      --about-bg:    var(--citrus);
+      --about-text:  var(--ink);        /* paper on citrus is only 2.85:1 */
+      --skills-bg:   var(--ink);
+      --lang-bg:     var(--oat);
+      --lang-text:   var(--ink);
+      --footer-bg:   var(--bordeaux);
+      --nav-bg:      var(--ink);
+      --ribbon-bg:   var(--bordeaux);
+      --cta-bg:      var(--bordeaux);
+      /* text and lines on the always-dark areas (nav, hero, skills, footer, ribbon) */
+      --on-dark:        var(--oat);
+      --on-dark-muted:  rgba(237,213,171,.78);
+      --on-dark-line:   rgba(237,213,171,.14);
+      --on-dark-border: rgba(237,213,171,.35);
+      --on-dark-fill:   rgba(237,213,171,.07);
+      --on-dark-chip:   rgba(237,213,171,.18);
+      --hero-subtitle:  var(--denim);
+      --skill-h-1:      var(--denim);
+      --skill-h-2:      var(--citrus);
+      --ribbon-sep:     var(--citrus);
+      --focus:          var(--oat);
+      color-scheme: light;
+
       --nav-h:    52px;
       --pad-v:    clamp(3.5rem, 8vw, 6rem);
       --pad-h:    clamp(1.5rem, 8vw, 7rem);
+    }
+
+    /* dark values live under "screen" only, so print always gets the light tokens */
+    @media screen {
+      :root[data-theme="dark"] {
+      --bg:          #140C0E;
+      --text:        #EFE6D8;
+      --text-muted:  rgba(239,230,216,.72);
+      --text-faint:  rgba(239,230,216,.64);
+      --line:        rgba(237,213,171,.14);
+      --accent:      #E3A6B2;   /* lightened bordeaux: plain bordeaux fails contrast on dark */
+      --accent-2:    #C9C95E;   /* lightened citrus */
+      --chip-bg:     rgba(227,166,178,.08);
+      --chip-line:   rgba(227,166,178,.3);
+      --about-bg:    #3A3A14;
+      --about-text:  var(--oat);
+      --skills-bg:   #0C0708;
+      --lang-bg:     #241815;
+      --lang-text:   var(--oat);
+      --nav-bg:      #0C0708;
+      color-scheme: dark;
+      }
+    }
+    @media screen and (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+      --bg:          #140C0E;
+      --text:        #EFE6D8;
+      --text-muted:  rgba(239,230,216,.72);
+      --text-faint:  rgba(239,230,216,.64);
+      --line:        rgba(237,213,171,.14);
+      --accent:      #E3A6B2;   /* lightened bordeaux: plain bordeaux fails contrast on dark */
+      --accent-2:    #C9C95E;   /* lightened citrus */
+      --chip-bg:     rgba(227,166,178,.08);
+      --chip-line:   rgba(227,166,178,.3);
+      --about-bg:    #3A3A14;
+      --about-text:  var(--oat);
+      --skills-bg:   #0C0708;
+      --lang-bg:     #241815;
+      --lang-text:   var(--oat);
+      --nav-bg:      #0C0708;
+      color-scheme: dark;
+      }
     }
 
     /* ── BASE ───────────────────────────────────────────────── */
@@ -36,9 +117,16 @@
       font-family: 'Inter', sans-serif;
       font-size: 1rem;
       line-height: 1.6;
-      color: var(--ink);
-      background: var(--paper);
+      color: var(--text);
+      background: var(--bg);
       padding-bottom: 44px; /* ribbon height */
+    }
+
+    body, nav, header, section, footer {
+      transition: background-color .25s, color .25s;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body, nav, header, section, footer { transition: none; }
     }
 
     a { color: inherit; text-decoration: none; }
@@ -50,7 +138,7 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--ink);
+      background: var(--nav-bg);
       height: var(--nav-h);
       display: flex;
       align-items: center;
@@ -65,7 +153,7 @@
       font-size: 1.3rem;
       text-transform: uppercase;
       letter-spacing: 0.04em;
-      color: var(--oat);
+      color: var(--on-dark);
       white-space: nowrap;
     }
 
@@ -86,7 +174,7 @@
       font-size: 0.95rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--oat);
+      color: var(--on-dark);
       padding: 0.4rem 0.75rem;
       white-space: nowrap;
       display: block;
@@ -117,30 +205,30 @@
       letter-spacing: 0.1em;
       line-height: 1.2;
       padding: 0.4rem 0.9rem;
-      border: 1px solid rgba(237,213,171,.35);
+      border: 1px solid var(--on-dark-border);
       white-space: nowrap;
       cursor: pointer;
     }
     #theme-toggle,
     .nav-menu-btn {
       background: transparent;
-      color: var(--oat);
+      color: var(--on-dark);
     }
     #theme-toggle:hover,
-    .nav-menu-btn:hover { border-color: var(--oat); }
+    .nav-menu-btn:hover { border-color: var(--on-dark); }
 
     .nav-cta {
-      background: var(--bordeaux);
-      border-color: var(--bordeaux);
-      color: var(--oat);
+      background: var(--cta-bg);
+      border-color: var(--cta-bg);
+      color: var(--on-dark);
     }
-    .nav-cta:hover { border-color: var(--oat); }
+    .nav-cta:hover { border-color: var(--on-dark); }
 
     .nav-menu-btn { display: none; }
 
     a:focus-visible,
     button:focus-visible {
-      outline: 2px solid var(--oat);
+      outline: 2px solid var(--focus);
       outline-offset: 3px;
     }
 
@@ -148,7 +236,7 @@
 
     /* ── HERO ───────────────────────────────────────────────── */
     #hero {
-      background: var(--bordeaux);
+      background: var(--hero-bg);
       min-height: calc(100vh - var(--nav-h));
       display: flex;
       flex-direction: column;
@@ -163,7 +251,7 @@
       text-transform: uppercase;
       letter-spacing: -0.025em;
       line-height: 0.87;
-      color: var(--oat);
+      color: var(--on-dark);
     }
 
     #hero .hero-title {
@@ -172,7 +260,7 @@
       font-size: clamp(1rem, 2.5vw, 1.5rem);
       text-transform: uppercase;
       letter-spacing: 0.4em;
-      color: var(--denim);
+      color: var(--hero-subtitle);
       margin-top: 1.25rem;
     }
 
@@ -181,16 +269,16 @@
       flex-wrap: wrap;
       gap: 0.5rem 2rem;
       font-size: 0.85rem;
-      color: rgba(237,213,171,.55);
+      color: var(--on-dark-muted);
       margin-top: 2rem;
       padding-top: 1.25rem;
-      border-top: 1px solid rgba(237,213,171,.14);
+      border-top: 1px solid var(--on-dark-line);
     }
-    #hero address a:hover { color: var(--oat); }
+    #hero address a:hover { color: var(--on-dark); }
 
     /* ── ABOUT ──────────────────────────────────────────────── */
     #about {
-      background: var(--citrus);
+      background: var(--about-bg);
       padding: var(--pad-v) var(--pad-h);
       display: grid;
       grid-template-columns: 1fr 2fr;
@@ -205,7 +293,7 @@
       text-transform: uppercase;
       letter-spacing: 0.02em;
       line-height: 1;
-      color: var(--paper);
+      color: var(--about-text);
     }
 
     .about-body {
@@ -217,12 +305,12 @@
     .about-body p {
       font-size: 1.05rem;
       line-height: 1.8;
-      color: var(--paper);
+      color: var(--about-text);
     }
 
     /* ── EXPERIENCE ─────────────────────────────────────────── */
     #experience {
-      background: var(--paper);
+      background: var(--bg);
       padding: var(--pad-v) var(--pad-h);
     }
 
@@ -233,7 +321,7 @@
       text-transform: uppercase;
       letter-spacing: 0.02em;
       line-height: 1;
-      color: var(--bordeaux);
+      color: var(--accent);
       margin-bottom: 2.5rem;
     }
 
@@ -244,7 +332,7 @@
       grid-template-columns: 1fr 2fr;
       column-gap: 4rem;
       padding: 2.5rem 0;
-      border-top: 1px solid rgba(96,29,45,.15);
+      border-top: 1px solid var(--line);
     }
 
     /* company label stays pinned while its bullets scroll past */
@@ -262,7 +350,7 @@
       text-transform: uppercase;
       letter-spacing: -0.01em;
       line-height: 1;
-      color: var(--bordeaux);
+      color: var(--accent);
     }
 
     .role-meta {
@@ -273,7 +361,7 @@
       font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--citrus);
+      color: var(--accent-2);
     }
     .role-meta + .role-meta { margin-top: 0.1rem; }
 
@@ -286,9 +374,9 @@
       font-size: 1rem;
       text-transform: lowercase;
       letter-spacing: 0.03em;
-      color: var(--bordeaux);
-      background: rgba(96,29,45,.06);
-      border: 1px solid rgba(96,29,45,.2);
+      color: var(--accent);
+      background: var(--chip-bg);
+      border: 1px solid var(--chip-line);
       padding: 0.35rem 0.85rem;
       border-radius: 2px;
     }
@@ -297,7 +385,7 @@
     .exp-body article + article {
       margin-top: 2rem;
       padding-top: 2rem;
-      border-top: 1px dashed rgba(96,29,45,.15);
+      border-top: 1px dashed var(--line);
     }
 
     .exp-body h3 {
@@ -307,7 +395,7 @@
       text-transform: uppercase;
       letter-spacing: 0.02em;
       line-height: 1;
-      color: var(--bordeaux);
+      color: var(--accent);
       margin-bottom: 1.1rem;
     }
     .exp-body h3:has(+ .exp-dates) { margin-bottom: 0.35rem; }
@@ -318,7 +406,7 @@
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      color: rgba(18,8,10,.4);
+      color: var(--text-faint);
       margin-bottom: 1.1rem;
     }
 
@@ -332,12 +420,12 @@
     .exp-body li {
       font-size: 0.95rem;
       line-height: 1.72;
-      color: var(--ink);
+      color: var(--text);
     }
 
     /* ── SKILLS ─────────────────────────────────────────────── */
     #skills {
-      background: var(--ink);
+      background: var(--skills-bg);
       padding: var(--pad-v) 0;
     }
 
@@ -347,7 +435,7 @@
       font-size: clamp(2.5rem, 6vw, 4.5rem);
       text-transform: uppercase;
       letter-spacing: 0.02em;
-      color: var(--oat);
+      color: var(--on-dark);
       margin-bottom: 3rem;
       padding: 0 var(--pad-h);
     }
@@ -360,8 +448,8 @@
 
     .skill-group {
       padding: 2rem 2.25rem;
-      border-right: 1px solid rgba(237,213,171,.1);
-      border-bottom: 1px solid rgba(237,213,171,.1);
+      border-right: 1px solid var(--on-dark-line);
+      border-bottom: 1px solid var(--on-dark-line);
     }
     .skill-group:nth-child(3n+1) { padding-left: var(--pad-h); }
     .skill-group:nth-child(3n)   { padding-right: var(--pad-h); border-right: none; }
@@ -379,8 +467,8 @@
       padding-bottom: 0.5rem;
       border-bottom: 2px solid currentColor;
     }
-    .skill-group:nth-child(odd)  h3 { color: var(--denim); }
-    .skill-group:nth-child(even) h3 { color: var(--citrus); }
+    .skill-group:nth-child(odd)  h3 { color: var(--skill-h-1); }
+    .skill-group:nth-child(even) h3 { color: var(--skill-h-2); }
 
     .skill-group ul {
       display: flex;
@@ -393,16 +481,17 @@
       font-size: 1rem;
       text-transform: lowercase;
       letter-spacing: 0.03em;
-      color: var(--oat);
-      background: rgba(237,213,171,.07);
-      border: 1px solid rgba(237,213,171,.18);
+      color: var(--on-dark);
+      background: var(--on-dark-fill);
+      border: 1px solid var(--on-dark-chip);
       padding: 0.35rem 0.85rem;
       border-radius: 2px;
     }
 
     /* ── BACKGROUND (languages + education) ─────────────────── */
     #background {
-      background: var(--oat);
+      background: var(--lang-bg);
+      color: var(--lang-text);
       padding: var(--pad-v) var(--pad-h);
     }
 
@@ -413,7 +502,7 @@
       text-transform: uppercase;
       letter-spacing: 0.02em;
       line-height: 1;
-      color: var(--bordeaux);
+      color: var(--accent);
       margin-bottom: 3rem;
     }
 
@@ -430,7 +519,7 @@
       font-size: 0.9rem;
       text-transform: uppercase;
       letter-spacing: 0.22em;
-      color: var(--bordeaux);
+      color: var(--accent);
       margin-bottom: 1.25rem;
       padding-bottom: 0.5rem;
       border-bottom: 2px solid currentColor;
@@ -445,7 +534,7 @@
       justify-content: space-between;
       align-items: center;
       padding: 0.6rem 0;
-      border-bottom: 1px solid rgba(96,29,45,.15);
+      border-bottom: 1px solid var(--line);
       cursor: default;
     }
     .lang-name {
@@ -454,7 +543,7 @@
       font-size: 1.05rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      color: var(--ink);
+      color: var(--lang-text);
     }
     .lang-level {
       display: grid;
@@ -469,14 +558,14 @@
     .lang-dots {
       font-size: 0.85rem;
       letter-spacing: 0.2em;
-      color: var(--bordeaux);
+      color: var(--accent);
       opacity: 1;
     }
     .lang-label {
       font-size: 0.72rem;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: rgba(18,8,10,.5);
+      color: var(--text-muted);
       opacity: 0;
       white-space: nowrap;
     }
@@ -492,7 +581,7 @@
 
     .edu-card {
       padding-top: 1.25rem;
-      border-top: 3px solid var(--bordeaux);
+      border-top: 3px solid var(--accent);
     }
 
     .edu-card h3 {
@@ -502,7 +591,7 @@
       text-transform: uppercase;
       letter-spacing: 0.03em;
       line-height: 1.2;
-      color: var(--ink);
+      color: var(--lang-text);
       margin-bottom: 0.4rem;
     }
 
@@ -512,12 +601,12 @@
       font-size: 0.88rem;
       text-transform: uppercase;
       letter-spacing: 0.09em;
-      color: var(--bordeaux);
+      color: var(--accent);
     }
 
     .edu-card .edu-loc {
       font-size: 0.77rem;
-      color: rgba(18,8,10,.42);
+      color: var(--text-muted);
       margin-top: 0.15rem;
     }
 
@@ -528,13 +617,13 @@
       font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.18em;
-      color: var(--citrus);
+      color: var(--accent-2);
       margin-top: 0.9rem;
     }
 
     /* ── FOOTER / CONTACT ───────────────────────────────────── */
     footer#contact {
-      background: var(--bordeaux);
+      background: var(--footer-bg);
       padding: var(--pad-v) var(--pad-h);
       text-align: center;
     }
@@ -546,7 +635,7 @@
       text-transform: uppercase;
       letter-spacing: -0.01em;
       line-height: 0.88;
-      color: var(--oat);
+      color: var(--on-dark);
       margin-bottom: 2.5rem;
     }
 
@@ -556,15 +645,15 @@
       justify-content: center;
       gap: 0.75rem 2.5rem;
       font-size: 0.95rem;
-      color: rgba(237,213,171,.6);
+      color: var(--on-dark-muted);
     }
 
     footer#contact address a {
-      color: var(--oat);
-      border-bottom: 1px solid rgba(237,213,171,.35);
+      color: var(--on-dark);
+      border-bottom: 1px solid var(--on-dark-border);
       padding-bottom: 2px;
     }
-    footer#contact address a:hover { border-color: var(--oat); }
+    footer#contact address a:hover { border-color: var(--on-dark); }
 
     /* ── RIBBON ─────────────────────────────────────────────── */
     #ribbon {
@@ -573,7 +662,7 @@
       left: 0;
       width: 100%;
       z-index: 90;
-      background: var(--bordeaux);
+      background: var(--ribbon-bg);
       overflow: hidden;
       height: 44px;
       display: flex;
@@ -598,12 +687,12 @@
       font-size: 0.95rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: var(--oat);
+      color: var(--on-dark);
       white-space: nowrap;
       padding: 0 0.5rem;
     }
     .ribbon-sep {
-      color: var(--citrus) !important;
+      color: var(--ribbon-sep) !important;
       font-size: 0.6rem !important;
       padding: 0 1.5rem !important;
       letter-spacing: 0 !important;
@@ -644,8 +733,8 @@
         align-items: stretch;
         gap: 1rem;
         padding: 0.75rem 1.5rem 1.5rem;
-        background: var(--ink);
-        border-top: 1px solid rgba(237,213,171,.14);
+        background: var(--nav-bg);
+        border-top: 1px solid var(--on-dark-line);
       }
       nav.menu-open #nav-menu { display: flex; }
 
@@ -662,11 +751,11 @@
       #hero h1 { font-size: clamp(3.25rem, 22vw, 4.5rem); }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .skill-group:nth-child(3n+1) { padding-left: var(--pad-h); }
-      .skill-group:nth-child(3n)   { padding-right: 2.25rem; border-right: 1px solid rgba(237,213,171,.1); }
+      .skill-group:nth-child(3n)   { padding-right: 2.25rem; border-right: 1px solid var(--on-dark-line); }
       .skill-group:nth-child(2n)   { border-right: none; padding-right: var(--pad-h); }
       .skill-group:nth-child(5),
       .skill-group:nth-child(6)    { border-bottom: none; }
-      .skill-group:nth-child(4)    { border-bottom: 1px solid rgba(237,213,171,.1); }
+      .skill-group:nth-child(4)    { border-bottom: 1px solid var(--on-dark-line); }
       .edu-grid { grid-template-columns: 1fr; }
     }
 
@@ -680,25 +769,25 @@
 
       nav, #ribbon { display: none !important; }
       body { padding-bottom: 0; background: #fff; }
-      * { box-shadow: none !important; }
+      * { box-shadow: none !important; transition: none !important; }
 
       #hero, #about, #experience, #skills, #background, footer#contact { background: #fff; }
       #hero { min-height: auto; padding: 1.5rem 0; }
-      #hero h1 { font-size: 4rem; color: var(--bordeaux); }
-      #hero .hero-title { color: var(--ink); }
-      #hero address { color: var(--ink); border-top-color: rgba(96,29,45,.15); }
+      #hero h1 { font-size: 4rem; color: var(--accent); }
+      #hero .hero-title { color: var(--text); }
+      #hero address { color: var(--text); border-top-color: var(--line); }
 
-      #about h2, #skills > h2, footer#contact h2 { color: var(--bordeaux); }
-      .about-body p { color: var(--ink); }
+      #about h2, #skills > h2, footer#contact h2 { color: var(--accent); }
+      .about-body p { color: var(--text); }
 
       #skills > h2 { margin-bottom: 1rem; }
-      .skill-group { padding: 1rem 1rem 1rem 0; border-color: rgba(96,29,45,.15); }
-      .skill-group li { color: var(--ink); background: none; border-color: rgba(18,8,10,.25); }
+      .skill-group { padding: 1rem 1rem 1rem 0; border-color: var(--line); }
+      .skill-group li { color: var(--text); background: none; border-color: var(--chip-line); }
 
       footer#contact { text-align: left; }
       footer#contact h2 { font-size: 2.5rem; margin-bottom: 1rem; }
-      footer#contact address { justify-content: flex-start; color: var(--ink); }
-      footer#contact address a { color: var(--ink); border-bottom: none; }
+      footer#contact address { justify-content: flex-start; color: var(--text); }
+      footer#contact address a { color: var(--text); border-bottom: none; }
 
       #experience { break-before: page; padding-top: 0; }
       .exp-role { padding: 1.5rem 0; }
@@ -723,7 +812,7 @@
         <li><a href="#contact">Contact</a></li>
       </ul>
       <div class="nav-actions">
-        <button type="button" id="theme-toggle" aria-label="Toggle dark mode">Dark mode</button>
+        <button type="button" id="theme-toggle">Dark mode</button>
         <a class="nav-cta" href="Madara-Kalpina-CV.pdf" download>Download CV</a>
       </div>
     </div>
@@ -1049,15 +1138,23 @@
 
   <script>
     // theme toggle
-    const btn  = document.getElementById('theme-toggle');
-    const root = document.documentElement;
-    const stored = localStorage.getItem('theme');
-    if (stored) root.setAttribute('data-theme', stored);
-    btn.addEventListener('click', () => {
-      const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
+    // (the saved choice is applied by the inline script in <head> to avoid a flash)
+    const themeBtn  = document.getElementById('theme-toggle');
+    const root      = document.documentElement;
+    const systemDark = matchMedia('(prefers-color-scheme: dark)');
+    const effectiveTheme = () => root.dataset.theme || (systemDark.matches ? 'dark' : 'light');
+    // the label names the mode you would switch to
+    const syncThemeBtn = () => {
+      themeBtn.textContent = effectiveTheme() === 'dark' ? 'Light mode' : 'Dark mode';
+    };
+    themeBtn.addEventListener('click', () => {
+      const next = effectiveTheme() === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      syncThemeBtn();
     });
+    systemDark.addEventListener('change', syncThemeBtn);
+    syncThemeBtn();
 
     // nav scroll-spy: highlight the link for the section in the middle of the viewport
     const links = document.querySelectorAll('.nav-links a[href^="#"]');
