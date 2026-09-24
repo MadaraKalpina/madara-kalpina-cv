@@ -223,124 +223,94 @@
     /* ── EXPERIENCE ─────────────────────────────────────────── */
     #experience {
       background: var(--paper);
-      padding: 0;
+      padding: var(--pad-v) var(--pad-h);
     }
 
-    /* Both columns + heading pin together as one unit */
-    .exp-sticky-display {
-      position: sticky;
-      top: var(--nav-h);
-      height: calc(100vh - var(--nav-h));
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      grid-template-rows: auto 1fr;
-      grid-template-areas:
-        "heading heading"
-        "sidebar content";
-      column-gap: 4rem;
-      row-gap: 1.5rem;
-      padding: 2.5rem var(--pad-h) 2rem;
-    }
-
-    .exp-sticky-display > h2 {
-      grid-area: heading;
-      align-self: end;
+    #experience > h2 {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 800;
       font-size: clamp(2.5rem, 6vw, 4.5rem);
       text-transform: uppercase;
       letter-spacing: 0.02em;
+      line-height: 1;
       color: var(--bordeaux);
+      margin-bottom: 2.5rem;
     }
 
-    /* ── Left: always-visible role list ── */
-    .exp-sidebar {
-      grid-area: sidebar;
-      height: 100%;
-      display: flex;
-      align-items: flex-start;
+    .exp-list { list-style: none; }
+
+    .exp-role {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      column-gap: 4rem;
+      padding: 2.5rem 0;
+      border-top: 1px solid rgba(96,29,45,.15);
     }
 
-    .exp-role-list {
-      display: flex;
-      flex-direction: column;
-      gap: 0.05rem;
-      width: 100%;
-    }
-
-    .exp-role-item {
-      padding: 0.45rem 0 0.45rem 1.5rem;
-      border-left: 4px solid transparent;
-      cursor: pointer;
-      transition: border-color 0.35s ease;
-    }
-    .exp-role-item.active {
-      border-left-color: var(--bordeaux);
+    /* company label stays pinned while its bullets scroll past */
+    .exp-label {
+      position: sticky;
+      top: calc(var(--nav-h) + 1.5rem);
+      align-self: start; /* required for sticky inside a grid */
     }
 
     .role-company {
+      display: block;
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 800;
-      font-size: clamp(0.85rem, 1.45vw, 1.1rem);
+      font-size: clamp(2rem, 3.5vw, 3rem);
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      line-height: 1;
-      color: rgba(18,8,10,.22);
-      display: block;
-      transition: font-size 0.38s ease, color 0.35s ease, letter-spacing 0.35s ease;
-    }
-    .exp-role-item.active .role-company {
-      font-size: clamp(2rem, 3.5vw, 3.5rem);
       letter-spacing: -0.01em;
+      line-height: 1;
       color: var(--bordeaux);
     }
 
     .role-meta {
+      display: block;
+      margin-top: 0.35rem;
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 600;
-      font-size: clamp(0.72rem, 1.1vw, 0.88rem);
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.16em;
-      color: rgba(18,8,10,.18);
-      display: block;
-      margin-top: 0.1rem;
-      transition: font-size 0.38s ease, color 0.35s ease;
-    }
-    .exp-role-item.active .role-meta {
-      font-size: clamp(0.85rem, 1.3vw, 1rem);
       color: var(--citrus);
     }
 
-    /* ── Right: content panels (stacked, one visible at a time) ── */
-    .exp-content-panels {
-      grid-area: content;
-      display: grid;
-      grid-template-areas: "panel";
-      height: 100%;
-      align-content: start;
-      overflow: clip; /* clip avoids creating a scroll context — wheel events reach the page */
+    .role-tag {
+      display: inline-block;
+      margin-top: 0.6rem;
+      padding: 0.15rem 0.5rem;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--denim);
+      border: 1px solid var(--denim);
+      border-radius: 2px;
     }
 
-    .exp-content-panel {
-      grid-area: panel;
-      opacity: 0;
-      transform: translateY(36px);
-      transition: opacity 0.42s ease, transform 0.42s ease;
-      pointer-events: none;
-      padding: 2rem 0;
+    .role-metric {
+      margin-top: 1.25rem;
+      font-size: 0.9rem;
+      color: rgba(18,8,10,.6);
     }
-    .exp-content-panel.active {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    .exp-content-panel.leaving {
-      opacity: 0;
-      transform: translateY(-36px);
-      pointer-events: none;
+    .role-metric strong {
+      display: block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      line-height: 1;
+      color: var(--bordeaux);
     }
 
-    .exp-content-panel h3 {
+    .exp-body article + article {
+      margin-top: 2rem;
+      padding-top: 2rem;
+      border-top: 1px dashed rgba(96,29,45,.15);
+    }
+
+    .exp-body h3 {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 800;
       font-size: clamp(1.5rem, 3vw, 2.2rem);
@@ -348,9 +318,11 @@
       letter-spacing: 0.02em;
       line-height: 1;
       color: var(--bordeaux);
-      margin-bottom: 0.35rem;
+      margin-bottom: 1.1rem;
     }
-    .exp-context {
+    .exp-body h3:has(+ .exp-dates) { margin-bottom: 0.35rem; }
+
+    .exp-dates {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 600;
       font-size: 0.78rem;
@@ -359,23 +331,18 @@
       color: rgba(18,8,10,.4);
       margin-bottom: 1.1rem;
     }
-    .exp-content-panel ul {
+
+    .exp-body ul {
       list-style: disc;
       padding-left: 1.05rem;
       display: flex;
       flex-direction: column;
       gap: 0.55rem;
     }
-    .exp-content-panel li {
-      font-size: 0.925rem;
+    .exp-body li {
+      font-size: 0.95rem;
       line-height: 1.72;
       color: var(--ink);
-    }
-
-    /* ── Scroll sentinels: invisible, drive IntersectionObserver ── */
-    .exp-sentinel {
-      height: 40vh;
-      pointer-events: none;
     }
 
     /* ── SKILLS ─────────────────────────────────────────────── */
@@ -664,33 +631,8 @@
         gap: 1.25rem;
       }
 
-      /* Experience: hide left list, show stacked content panels */
-      .exp-sticky-display {
-        position: static;
-        height: auto;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto auto;
-        grid-template-areas: "heading" "content";
-        column-gap: 0;
-        row-gap: 1.5rem;
-        padding: 1.5rem var(--pad-h);
-      }
-      .exp-sidebar { display: none; }
-      .exp-content-panels {
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-        height: auto;
-        overflow: visible;
-      }
-      .exp-content-panel {
-        opacity: 1;
-        transform: none;
-        pointer-events: auto;
-        padding: 2rem 0;
-        border-top: 1px solid rgba(96,29,45,.12);
-      }
-      .exp-sentinel { height: 0; }
+      .exp-role { grid-template-columns: 1fr; row-gap: 1.25rem; }
+      .exp-label { position: static; }
 
       .background-grid {
         grid-template-columns: 1fr;
@@ -785,50 +727,18 @@
 
     <!-- ── EXPERIENCE ─────────────────────────────────────── -->
     <section id="experience" aria-labelledby="experience-heading">
-      <div class="exp-scroll-stage">
+      <h2 id="experience-heading">Work Experience</h2>
+      <ol class="exp-list">
 
-        <!-- sticky display: heading + both columns pin together as one unit -->
-        <div class="exp-sticky-display">
-          <h2 id="experience-heading">Work Experience</h2>
-
-          <!-- left: persistent list of all roles, active one styled prominently -->
-          <div class="exp-sidebar">
-            <div class="exp-role-list">
-
-              <div class="exp-role-item active" data-for="exp-pixelfield">
-                <span class="role-company">Pixelfield</span>
-                <span class="role-meta">2025 – current</span>
-              </div>
-
-              <div class="exp-role-item" data-for="exp-green0meter">
-                <span class="role-company">Green0meter</span>
-                <span class="role-meta">2024 – 2025</span>
-              </div>
-
-              <div class="exp-role-item" data-for="exp-techchill">
-                <span class="role-company">TechChill</span>
-                <span class="role-meta">2022 – 2023</span>
-              </div>
-
-              <div class="exp-role-item" data-for="exp-seb-po">
-                <span class="role-company">SEB Bank</span>
-                <span class="role-meta">2020 – 2022</span>
-              </div>
-
-              <div class="exp-role-item" data-for="exp-seb-editor">
-                <span class="role-company">SEB Bank</span>
-                <span class="role-meta">2019 – 2020</span>
-              </div>
-
-            </div>
+        <li class="exp-role">
+          <div class="exp-label">
+            <span class="role-company">Pixelfield</span>
+            <span class="role-meta">Prague · 2025 – current</span>
+            <p class="role-metric"><strong>14</strong> projects in parallel</p>
           </div>
-
-          <!-- right: content panels, one visible at a time -->
-          <div class="exp-content-panels">
-
-            <article id="exp-pixelfield" class="exp-content-panel active">
+          <div class="exp-body">
+            <article>
               <h3>Product Manager</h3>
-              <p class="exp-context">Pixelfield &middot; Prague, Czechia &middot; 2025 – current</p>
               <ul>
                 <li>Delivered up to 14 short-term projects in parallel, on time, across mobile, web, VR and e-commerce while balancing the everyday challenges of agency life.</li>
                 <li>Managed end-to-end project delivery using the PRINCE2-Agile framework, combining client-facing governance, scope control and stage sign-offs with agile sprint cycles.</li>
@@ -836,10 +746,19 @@
                 <li>Led the full product lifecycle from discovery and PRD preparation through design, development and launch across a wide range of digital B2C products, including mobile and web apps, VR, games, e-stores and landing pages.</li>
               </ul>
             </article>
+          </div>
+        </li>
 
-            <article id="exp-green0meter" class="exp-content-panel">
+        <li class="exp-role">
+          <div class="exp-label">
+            <span class="role-company">Green0meter</span>
+            <span class="role-meta">Prague · 2024 – 2025</span>
+            <span class="role-tag">B2B SaaS</span>
+            <p class="role-metric"><strong>−50%</strong> support requests</p>
+          </div>
+          <div class="exp-body">
+            <article>
               <h3>Product Manager</h3>
-              <p class="exp-context">Green0meter &middot; Prague, Czechia &middot; 2024 – 2025</p>
               <ul>
                 <li>As the right hand of a product-driven founder, owned the end-to-end product development lifecycle for Green0meter's B2B SaaS platform, driving feature development aligned with both short-term usability and long-term product vision.</li>
                 <li>Collected and analysed user feedback using analytical tools to improve UI and UX, and collaborated with a designer to structure independent features into intuitive, end-to-end user journeys.</li>
@@ -849,18 +768,35 @@
                 <li>Created product documentation and integrated it into Intercom Help Center. This reduced consultant support requests by 50%.</li>
               </ul>
             </article>
+          </div>
+        </li>
 
-            <article id="exp-techchill" class="exp-content-panel">
+        <li class="exp-role">
+          <div class="exp-label">
+            <span class="role-company">TechChill</span>
+            <span class="role-meta">Riga · 2022 – 2023 · alongside SEB</span>
+            <p class="role-metric"><strong>130+</strong> speakers curated</p>
+          </div>
+          <div class="exp-body">
+            <article>
               <h3>Speakers &amp; Agenda Manager</h3>
-              <p class="exp-context">TechChill &middot; Riga, Latvia &middot; 2022 – 2023</p>
               <ul>
                 <li>Alongside a full-time role at SEB, curated a programme of 130+ speakers for a two-day startup conference in 2023 in Riga, Latvia and in Milan, Italy.</li>
               </ul>
             </article>
+          </div>
+        </li>
 
-            <article id="exp-seb-po" class="exp-content-panel">
+        <li class="exp-role">
+          <div class="exp-label">
+            <span class="role-company">SEB Bank</span>
+            <span class="role-meta">Riga · 2019 – 2022</span>
+            <p class="role-metric"><strong>3</strong> Baltic countries, one CMS</p>
+          </div>
+          <div class="exp-body">
+            <article>
               <h3>Agile Product Owner</h3>
-              <p class="exp-context">SEB Bank &middot; Riga, Latvia &middot; 2020 – 2022</p>
+              <p class="exp-dates">2020 – 2022</p>
               <ul>
                 <li>Managed stakeholders across marketing, sales and other product areas.</li>
                 <li>Held a development backlog for a cross-country team of 7 web editors and front-end developers.</li>
@@ -869,28 +805,18 @@
                 <li>Led product strategy and UX-focused roadmap for a cross-country MS SharePoint-based document management system and intranet platform.</li>
               </ul>
             </article>
-
-            <article id="exp-seb-editor" class="exp-content-panel">
+            <article>
               <h3>Web Editor</h3>
-              <p class="exp-context">SEB Bank &middot; Riga, Latvia &middot; 2019 – 2020</p>
+              <p class="exp-dates">2019 – 2020</p>
               <ul>
                 <li>Managed SEB bank public website by creating new web content as well as amending the existing one using HTML &amp; CSS.</li>
                 <li>Worked on simple JS applications to improve UX.</li>
               </ul>
             </article>
-
           </div>
+        </li>
 
-        </div>
-
-        <!-- invisible sentinels: one per role, drive the scrollspy observer -->
-        <div class="exp-sentinel" data-role="exp-pixelfield"></div>
-        <div class="exp-sentinel" data-role="exp-green0meter"></div>
-        <div class="exp-sentinel" data-role="exp-techchill"></div>
-        <div class="exp-sentinel" data-role="exp-seb-po"></div>
-        <div class="exp-sentinel" data-role="exp-seb-editor"></div>
-
-      </div>
+      </ol>
     </section>
 
     <!-- ── SKILLS ─────────────────────────────────────────── -->
@@ -1148,46 +1074,6 @@
     new IntersectionObserver(([entry]) => {
       ribbon.classList.toggle('ribbon-visible', !entry.isIntersecting);
     }, { threshold: 0 }).observe(hero);
-
-    // scrollspy: sentinel-driven — updates left list + slides right panel in/out
-    function setExpActive(id) {
-      document.querySelectorAll('.exp-role-item').forEach(item =>
-        item.classList.toggle('active', item.dataset.for === id)
-      );
-      document.querySelectorAll('.exp-content-panel').forEach(panel => {
-        if (panel.id === id) {
-          panel.classList.remove('leaving');
-          panel.classList.add('active');
-        } else if (panel.classList.contains('active')) {
-          // slide the outgoing panel upward
-          panel.classList.remove('active');
-          panel.classList.add('leaving');
-          panel.addEventListener('transitionend', () =>
-            panel.classList.remove('leaving'), { once: true }
-          );
-        }
-      });
-    }
-
-    document.querySelectorAll('.exp-sentinel').forEach(s => {
-      new IntersectionObserver(([obs]) => {
-        if (obs.isIntersecting) setExpActive(obs.target.dataset.role);
-      }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 }).observe(s);
-    });
-
-    // clicking a role label smooth-scrolls to that sentinel, landing it in the trigger zone
-    document.querySelectorAll('.exp-role-item').forEach(item => {
-      item.addEventListener('click', () => {
-        const sentinel = document.querySelector(
-          `.exp-sentinel[data-role="${item.dataset.for}"]`
-        );
-        if (!sentinel) return;
-        const targetY = sentinel.getBoundingClientRect().top
-                        + window.scrollY
-                        - window.innerHeight * 0.25;
-        window.scrollTo({ top: targetY, behavior: 'smooth' });
-      });
-    });
   </script>
 
 </body>
