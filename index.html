@@ -42,23 +42,25 @@
       --hero-bg:     var(--bordeaux);
       --about-bg:    var(--citrus);
       --about-text:  var(--ink);        /* paper on citrus is only 2.85:1 */
-      --skills-bg:   var(--ink);
+      --skills-bg:   var(--citrus);     /* matches About */
+      --skills-text:       var(--ink);
+      --skills-line:       rgba(18,8,10,.15);
+      --skills-chip-fill:  rgba(18,8,10,.06);
+      --skills-chip-line:  rgba(18,8,10,.25);
+      --skill-h-1:         #4F1726;           /* bordeaux deepened to pass AA on citrus */
+      --skill-h-2:         var(--ink);
       --lang-bg:     var(--oat);
       --lang-text:   var(--ink);
       --footer-bg:   var(--bordeaux);
       --nav-bg:      var(--ink);
       --ribbon-bg:   var(--bordeaux);
       --cta-bg:      var(--bordeaux);
-      /* text and lines on the always-dark areas (nav, hero, skills, footer, ribbon) */
+      /* text and lines on the always-dark areas (nav, hero, footer, ribbon) */
       --on-dark:        var(--oat);
       --on-dark-muted:  rgba(237,213,171,.78);
       --on-dark-line:   rgba(237,213,171,.14);
       --on-dark-border: rgba(237,213,171,.35);
-      --on-dark-fill:   rgba(237,213,171,.07);
-      --on-dark-chip:   rgba(237,213,171,.18);
       --hero-subtitle:  var(--denim);
-      --skill-h-1:      var(--denim);
-      --skill-h-2:      var(--citrus);
       --ribbon-sep:     var(--citrus);
       --focus:          var(--oat);
       color-scheme: light;
@@ -83,6 +85,12 @@
       --about-bg:    #3A3A14;
       --about-text:  var(--oat);
       --skills-bg:   #0C0708;
+      --skills-text:       var(--oat);
+      --skills-line:       rgba(237,213,171,.1);
+      --skills-chip-fill:  rgba(237,213,171,.07);
+      --skills-chip-line:  rgba(237,213,171,.18);
+      --skill-h-1:         var(--denim);
+      --skill-h-2:         var(--citrus);
       --lang-bg:     #241815;
       --lang-text:   var(--oat);
       --nav-bg:      #0C0708;
@@ -103,6 +111,12 @@
       --about-bg:    #3A3A14;
       --about-text:  var(--oat);
       --skills-bg:   #0C0708;
+      --skills-text:       var(--oat);
+      --skills-line:       rgba(237,213,171,.1);
+      --skills-chip-fill:  rgba(237,213,171,.07);
+      --skills-chip-line:  rgba(237,213,171,.18);
+      --skill-h-1:         var(--denim);
+      --skill-h-2:         var(--citrus);
       --lang-bg:     #241815;
       --lang-text:   var(--oat);
       --nav-bg:      #0C0708;
@@ -434,7 +448,7 @@
       font-size: clamp(2.5rem, 6vw, 4.5rem);
       text-transform: uppercase;
       letter-spacing: 0.02em;
-      color: var(--on-dark);
+      color: var(--skills-text);
       margin-bottom: 3rem;
       padding: 0 var(--pad-h);
     }
@@ -447,8 +461,8 @@
 
     .skill-group {
       padding: 2rem 2.25rem;
-      border-right: 1px solid var(--on-dark-line);
-      border-bottom: 1px solid var(--on-dark-line);
+      border-right: 1px solid var(--skills-line);
+      border-bottom: 1px solid var(--skills-line);
     }
     .skill-group:nth-child(3n+1) { padding-left: var(--pad-h); }
     .skill-group:nth-child(3n)   { padding-right: var(--pad-h); border-right: none; }
@@ -480,9 +494,9 @@
       font-size: 1rem;
       text-transform: lowercase;
       letter-spacing: 0.03em;
-      color: var(--on-dark);
-      background: var(--on-dark-fill);
-      border: 1px solid var(--on-dark-chip);
+      color: var(--skills-text);
+      background: var(--skills-chip-fill);
+      border: 1px solid var(--skills-chip-line);
       padding: 0.35rem 0.85rem;
       border-radius: 2px;
     }
@@ -750,11 +764,11 @@
       #hero h1 { font-size: clamp(3.25rem, 22vw, 4.5rem); }
       .skills-grid { grid-template-columns: 1fr 1fr; }
       .skill-group:nth-child(3n+1) { padding-left: var(--pad-h); }
-      .skill-group:nth-child(3n)   { padding-right: 2.25rem; border-right: 1px solid var(--on-dark-line); }
+      .skill-group:nth-child(3n)   { padding-right: 2.25rem; border-right: 1px solid var(--skills-line); }
       .skill-group:nth-child(2n)   { border-right: none; padding-right: var(--pad-h); }
       .skill-group:nth-child(5),
       .skill-group:nth-child(6)    { border-bottom: none; }
-      .skill-group:nth-child(4)    { border-bottom: 1px solid var(--on-dark-line); }
+      .skill-group:nth-child(4)    { border-bottom: 1px solid var(--skills-line); }
       .edu-grid { grid-template-columns: 1fr; }
     }
 
