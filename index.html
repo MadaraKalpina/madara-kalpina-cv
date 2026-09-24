@@ -711,6 +711,15 @@
 
       .exp-role { grid-template-columns: 1fr; row-gap: 1.25rem; }
       .exp-label { position: static; }
+      /* company name and sector tag share the first line, tag right-aligned */
+      .exp-label {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        column-gap: 1rem;
+      }
+      .role-meta { grid-column: 1 / -1; grid-row: 2; }
+      .role-tag  { grid-column: 2; grid-row: 1; margin-top: 0; }
 
       .background-grid {
         grid-template-columns: 1fr;
@@ -748,7 +757,7 @@
 
     @media (max-width: 480px) {
       #hero h1 { font-size: clamp(3.25rem, 22vw, 4.5rem); }
-      .skills-grid { grid-template-columns: 1fr 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
       .edu-item { grid-template-columns: 1fr; row-gap: 0.3rem; }
       .edu-note { display: inline; margin-left: 0.4rem; }
     }
