@@ -547,23 +547,31 @@
       color: var(--lang-text);
     }
     .lang-level {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
+      display: grid;
+      grid-template-areas: "slot";
+    }
+    .lang-dots,
+    .lang-label {
+      grid-area: slot;
+      text-align: right;
+      transition: opacity 0.2s ease;
     }
     .lang-dots {
       font-size: 0.85rem;
       letter-spacing: 0.2em;
       color: var(--accent);
+      opacity: 1;
     }
     .lang-label {
-      min-width: 11em; /* fits "Conversational", keeps the dots in one column */
-      font-size: 0.78rem;
+      font-size: 0.72rem;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       color: var(--text-muted);
+      opacity: 0;
       white-space: nowrap;
     }
+    #languages li:hover .lang-dots  { opacity: 0; }
+    #languages li:hover .lang-label { opacity: 1; }
 
     /* ── EDUCATION ──────────────────────────────────────────── */
     .edu-grid {
@@ -690,9 +698,6 @@
       padding: 0 1.5rem !important;
       letter-spacing: 0 !important;
       flex-shrink: 0;
-    }
-    @media (prefers-reduced-motion: reduce) {
-      .ribbon-track { animation: none; }
     }
     @keyframes ribbon-scroll {
       from { transform: translateX(0); }
@@ -1182,14 +1187,12 @@
       }
     });
 
-    // ribbon: show between the hero and the contact footer, so it never covers either
+    // ribbon: show after hero scrolls out of view
     const ribbon = document.getElementById('ribbon');
-    const ribbonHiders = new Map();
-    const ribbonObs = new IntersectionObserver(entries => {
-      entries.forEach(e => ribbonHiders.set(e.target, e.isIntersecting));
-      ribbon.classList.toggle('ribbon-visible', ![...ribbonHiders.values()].some(Boolean));
-    }, { threshold: 0 });
-    ['hero', 'contact'].forEach(id => ribbonObs.observe(document.getElementById(id)));
+    const hero   = document.getElementById('hero');
+    new IntersectionObserver(([entry]) => {
+      ribbon.classList.toggle('ribbon-visible', !entry.isIntersecting);
+    }, { threshold: 0 }).observe(hero);
   </script>
 
 </body>
