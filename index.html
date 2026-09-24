@@ -59,60 +59,97 @@
       padding: 0 var(--pad-h);
     }
 
-    nav ul {
+    .nav-brand {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 800;
+      font-size: 1.3rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--oat);
+      white-space: nowrap;
+    }
+
+    #nav-menu {
       display: flex;
       align-items: center;
-      overflow-x: auto;
-      scrollbar-width: none;
-      gap: 0;
+      gap: 1.5rem;
     }
-    nav ul::-webkit-scrollbar { display: none; }
 
-    nav a {
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links a {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 600;
-      font-size: 0.78rem;
+      font-size: 0.95rem;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.12em;
       color: var(--oat);
-      padding: 0.4rem 0.85rem;
+      padding: 0.4rem 0.75rem;
       white-space: nowrap;
       display: block;
-      opacity: 0.65;
+      opacity: 0.8;
     }
-    nav a:hover { opacity: 1; }
+    .nav-links a:hover,
+    .nav-links a.active { opacity: 1; }
+    .nav-links a.active {
+      text-decoration: underline;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 6px;
+    }
 
     .nav-actions {
       display: flex;
+      align-items: center;
       gap: 0.5rem;
       flex-shrink: 0;
     }
 
     #theme-toggle,
-    #print-btn {
+    .nav-cta,
+    .nav-menu-btn {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 600;
-      font-size: 0.72rem;
+      font-size: 0.85rem;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      background: transparent;
-      border: 1px solid rgba(237,213,171,.3);
-      color: var(--oat);
-      padding: 0.28rem 0.8rem;
+      line-height: 1.2;
+      padding: 0.4rem 0.9rem;
+      border: 1px solid rgba(237,213,171,.35);
+      white-space: nowrap;
       cursor: pointer;
-      opacity: 0.7;
+    }
+    #theme-toggle,
+    .nav-menu-btn {
+      background: transparent;
+      color: var(--oat);
     }
     #theme-toggle:hover,
-    #print-btn:hover {
-      opacity: 1;
+    .nav-menu-btn:hover { border-color: var(--oat); }
+
+    .nav-cta {
       background: var(--bordeaux);
       border-color: var(--bordeaux);
+      color: var(--oat);
     }
+    .nav-cta:hover { border-color: var(--oat); }
+
+    .nav-menu-btn { display: none; }
+
+    a:focus-visible,
+    button:focus-visible {
+      outline: 2px solid var(--oat);
+      outline-offset: 3px;
+    }
+
+    section, footer { scroll-margin-top: var(--nav-h); }
 
     /* ── HERO ───────────────────────────────────────────────── */
     #hero {
       background: var(--bordeaux);
-      min-height: 100vh;
+      min-height: calc(100vh - var(--nav-h));
       display: flex;
       flex-direction: column;
       justify-content: flex-end;
@@ -406,17 +443,13 @@
       border-radius: 2px;
     }
 
-    /* ── LANGUAGES ──────────────────────────────────────────── */
-    #languages {
+    /* ── BACKGROUND (languages + education) ─────────────────── */
+    #background {
       background: var(--oat);
       padding: var(--pad-v) var(--pad-h);
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 2rem 5rem;
-      align-items: start;
     }
 
-    #languages h2 {
+    #background > h2 {
       font-family: 'Barlow Condensed', sans-serif;
       font-weight: 800;
       font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -424,12 +457,31 @@
       letter-spacing: 0.02em;
       line-height: 1;
       color: var(--bordeaux);
+      margin-bottom: 3rem;
+    }
+
+    .background-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 3rem 5rem;
+      align-items: start;
+    }
+
+    .background-grid > div > h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: var(--bordeaux);
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid currentColor;
     }
 
     #languages ul {
       display: flex;
       flex-direction: column;
-      padding-top: 0.35rem;
     }
     #languages li {
       display: flex;
@@ -475,24 +527,9 @@
     #languages li:hover .lang-label { opacity: 1; }
 
     /* ── EDUCATION ──────────────────────────────────────────── */
-    #education {
-      background: var(--paper);
-      padding: var(--pad-v) var(--pad-h);
-    }
-
-    #education > h2 {
-      font-family: 'Barlow Condensed', sans-serif;
-      font-weight: 800;
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      color: var(--bordeaux);
-      margin-bottom: 3rem;
-    }
-
     .edu-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 2rem;
     }
 
@@ -655,12 +692,38 @@
       }
       .exp-sentinel { height: 0; }
 
-      #languages {
+      .background-grid {
         grid-template-columns: 1fr;
-        gap: 1.25rem;
       }
+    }
 
-      .nav-actions { display: none; }
+    /* nav: collapse into a Menu dropdown before the links can overflow */
+    @media (max-width: 960px) {
+      nav[aria-label="Page sections"] { padding: 0 1.5rem; }
+      .nav-menu-btn { display: block; }
+
+      #nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+        padding: 0.75rem 1.5rem 1.5rem;
+        background: var(--ink);
+        border-top: 1px solid rgba(237,213,171,.14);
+      }
+      nav.menu-open #nav-menu { display: flex; }
+
+      .nav-links { flex-direction: column; align-items: stretch; }
+      .nav-links a { padding: 0.75rem 0; font-size: 1.05rem; }
+      .nav-links a.active { text-decoration: none; }
+      .nav-links a.active::before { content: '— '; }
+
+      .nav-actions { gap: 0.75rem; flex-wrap: wrap; }
+      .nav-actions > * { flex: 1; text-align: center; padding: 0.7rem 0.9rem; }
     }
 
     @media (max-width: 480px) {
@@ -679,6 +742,24 @@
 </head>
 <body>
 
+  <!-- ── NAV ────────────────────────────────────────────── -->
+  <nav aria-label="Page sections">
+    <a class="nav-brand" href="#hero">Madara Kalpina</a>
+    <button type="button" class="nav-menu-btn" aria-expanded="false" aria-controls="nav-menu">Menu</button>
+    <div id="nav-menu">
+      <ul class="nav-links">
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#background">Background</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button type="button" id="theme-toggle" aria-label="Toggle dark mode">Dark mode</button>
+        <a class="nav-cta" href="Madara-Kalpina-CV.pdf" download>Download CV</a>
+      </div>
+    </div>
+  </nav>
+
   <!-- ── HERO ───────────────────────────────────────────── -->
   <header id="hero">
     <h1>Madara<br>Kalpina</h1>
@@ -690,22 +771,6 @@
       <span>Prague, Czechia</span>
     </address>
   </header>
-
-  <!-- ── NAV ────────────────────────────────────────────── -->
-  <nav aria-label="Page sections">
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#languages">Languages</a></li>
-      <li><a href="#education">Education</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <div class="nav-actions">
-      <button type="button" id="theme-toggle" aria-label="Toggle dark mode">Dark mode</button>
-      <button type="button" id="print-btn" onclick="window.print()">Print / PDF</button>
-    </div>
-  </nav>
 
   <main>
 
@@ -892,80 +957,88 @@
       </div>
     </section>
 
-    <!-- ── LANGUAGES ─────────────────────────────────────────── -->
-    <section id="languages" aria-labelledby="lang-heading">
-      <h2 id="lang-heading">Languages</h2>
-      <ul>
-        <li>
-          <span class="lang-name">English</span>
-          <span class="lang-level">
-            <span class="lang-dots" aria-hidden="true">●●●●</span>
-            <span class="lang-label">Fluent</span>
-          </span>
-        </li>
-        <li>
-          <span class="lang-name">Latvian</span>
-          <span class="lang-level">
-            <span class="lang-dots" aria-hidden="true">●●●●</span>
-            <span class="lang-label">Fluent</span>
-          </span>
-        </li>
-        <li>
-          <span class="lang-name">German</span>
-          <span class="lang-level">
-            <span class="lang-dots" aria-hidden="true">●●●○</span>
-            <span class="lang-label">Conversational</span>
-          </span>
-        </li>
-        <li>
-          <span class="lang-name">Russian</span>
-          <span class="lang-level">
-            <span class="lang-dots" aria-hidden="true">●●●○</span>
-            <span class="lang-label">Conversational</span>
-          </span>
-        </li>
-        <li>
-          <span class="lang-name">Czech</span>
-          <span class="lang-level">
-            <span class="lang-dots" aria-hidden="true">●○○○</span>
-            <span class="lang-label">Beginner</span>
-          </span>
-        </li>
-      </ul>
-    </section>
+    <!-- ── BACKGROUND ─────────────────────────────────────────── -->
+    <section id="background" aria-labelledby="background-heading">
+      <h2 id="background-heading">Background</h2>
+      <div class="background-grid">
 
-    <!-- ── EDUCATION ──────────────────────────────────────── -->
-    <section id="education" aria-labelledby="education-heading">
-      <h2 id="education-heading">Education</h2>
-      <div class="edu-grid">
+        <!-- languages -->
+        <div id="languages">
+          <h3 id="lang-heading">Languages</h3>
+          <ul>
+            <li>
+              <span class="lang-name">English</span>
+              <span class="lang-level">
+                <span class="lang-dots" aria-hidden="true">●●●●</span>
+                <span class="lang-label">Fluent</span>
+              </span>
+            </li>
+            <li>
+              <span class="lang-name">Latvian</span>
+              <span class="lang-level">
+                <span class="lang-dots" aria-hidden="true">●●●●</span>
+                <span class="lang-label">Fluent</span>
+              </span>
+            </li>
+            <li>
+              <span class="lang-name">German</span>
+              <span class="lang-level">
+                <span class="lang-dots" aria-hidden="true">●●●○</span>
+                <span class="lang-label">Conversational</span>
+              </span>
+            </li>
+            <li>
+              <span class="lang-name">Russian</span>
+              <span class="lang-level">
+                <span class="lang-dots" aria-hidden="true">●●●○</span>
+                <span class="lang-label">Conversational</span>
+              </span>
+            </li>
+            <li>
+              <span class="lang-name">Czech</span>
+              <span class="lang-level">
+                <span class="lang-dots" aria-hidden="true">●○○○</span>
+                <span class="lang-label">Beginner</span>
+              </span>
+            </li>
+          </ul>
+        </div>
 
-        <article class="edu-card">
-          <h3>Front-end Web Development</h3>
-          <p class="school">Riga Coding School</p>
-          <p class="edu-loc">Latvia</p>
-          <time>2019</time>
-        </article>
+        <!-- education -->
+        <div id="education">
+          <h3 id="education-heading">Education</h3>
+          <div class="edu-grid">
 
-        <article class="edu-card">
-          <h3>BSc in Computer Sciences</h3>
-          <p class="school">University of Latvia</p>
-          <p class="edu-loc">Latvia</p>
-          <time>2018 (unfinished)</time>
-        </article>
+            <article class="edu-card">
+              <h3>Front-end Web Development</h3>
+              <p class="school">Riga Coding School</p>
+              <p class="edu-loc">Latvia</p>
+              <time>2019</time>
+            </article>
 
-        <article class="edu-card">
-          <h3>BA in Business Administration</h3>
-          <p class="school">University College Birmingham</p>
-          <p class="edu-loc">United Kingdom</p>
-          <time>2015 (Erasmus Exchange)</time>
-        </article>
+            <article class="edu-card">
+              <h3>BSc in Computer Sciences</h3>
+              <p class="school">University of Latvia</p>
+              <p class="edu-loc">Latvia</p>
+              <time>2018 (unfinished)</time>
+            </article>
 
-        <article class="edu-card">
-          <h3>BA in Media &amp; Entertainment Management</h3>
-          <p class="school">NHS Stenden Hogeschool</p>
-          <p class="edu-loc">Netherlands</p>
-          <time>2013 – 2017</time>
-        </article>
+            <article class="edu-card">
+              <h3>BA in Business Administration</h3>
+              <p class="school">University College Birmingham</p>
+              <p class="edu-loc">United Kingdom</p>
+              <time>2015 (Erasmus Exchange)</time>
+            </article>
+
+            <article class="edu-card">
+              <h3>BA in Media &amp; Entertainment Management</h3>
+              <p class="school">NHS Stenden Hogeschool</p>
+              <p class="edu-loc">Netherlands</p>
+              <time>2013 – 2017</time>
+            </article>
+
+          </div>
+        </div>
 
       </div>
     </section>
@@ -1028,6 +1101,45 @@
       const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       root.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
+    });
+
+    // nav scroll-spy: highlight the link for the section in the middle of the viewport
+    const links = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sections = [...links].map(a => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+    function setNavActive(id) {
+      links.forEach(a => {
+        const on = a.getAttribute('href') === '#' + id;
+        a.classList.toggle('active', on);
+        on ? a.setAttribute('aria-current', 'true') : a.removeAttribute('aria-current');
+      });
+    }
+    const spy = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) setNavActive(e.target.id); });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+    // hero and about have no link, so observing them clears the active state
+    [document.getElementById('hero'), document.getElementById('about'), ...sections]
+      .forEach(s => spy.observe(s));
+    // the footer can be too short to reach the middle band, so activate it at the page bottom
+    window.addEventListener('scroll', () => {
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        setNavActive('contact');
+      }
+    }, { passive: true });
+
+    // mobile menu
+    const nav     = document.querySelector('nav[aria-label="Page sections"]');
+    const menuBtn = nav.querySelector('.nav-menu-btn');
+    function setMenu(open) {
+      nav.classList.toggle('menu-open', open);
+      menuBtn.setAttribute('aria-expanded', String(open));
+    }
+    menuBtn.addEventListener('click', () => setMenu(!nav.classList.contains('menu-open')));
+    links.forEach(a => a.addEventListener('click', () => setMenu(false)));
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && nav.classList.contains('menu-open')) {
+        setMenu(false);
+        menuBtn.focus();
+      }
     });
 
     // ribbon: show after hero scrolls out of view
